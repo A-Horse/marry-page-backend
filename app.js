@@ -4,22 +4,19 @@ var fs = require('fs');
 
 var app = express();
 
+
+
+app.use(require('body-parser').json());
+app.use(require('body-parser').urlencoded({extended: true}));
+app.use('/', express.static('../marry-page'));
+
 var router = express.Router();
-
-router.get('/fill-in', (req, res) => {
-  res.json({hi: 'hi'})
-})
-
-router.post('/fill-in', (req, res) => {
+router.post('/api/fill-in', (req, res) => {
   var name = req.body.name;
   var number = req.body.number;
-  console.log(
-    '1'
-  );
-  fs.writeFile('people', `${name}##${number}\n`);
+  fs.appendFile('people', `${name}##${number}\n`);
   res.status(201).send();
 });
-console.log('start');
 
 app.use(router);
 

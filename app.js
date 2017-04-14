@@ -1,9 +1,10 @@
 var express = require('express');
 var http = require('http');
 var fs = require('fs');
+var cors = require('cors')
 
 var app = express();
-
+app.use(cors());
 
 
 app.use(require('body-parser').json());
@@ -22,7 +23,7 @@ app.use(router);
 
 function startServer() {
   const server = http.createServer(app);
-  server.listen(8889);
+  server.listen(80);
 }
 
 startServer();

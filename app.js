@@ -1,17 +1,19 @@
 var express = require('express');
 var http = require('http');
 var fs = require('fs');
-var cors = require('cors')
+var cors = require('cors');
 
 var app = express();
 app.use(cors());
-
-
 app.use(require('body-parser').json());
 app.use(require('body-parser').urlencoded({extended: true}));
 app.use('/', express.static('../marry-page'));
 
 var router = express.Router();
+router.get('/api/check', (req, res) => {
+  res.send('checked');
+});
+
 router.post('/api/fill-in', (req, res) => {
   var name = req.body.name;
   var number = req.body.number;

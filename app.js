@@ -36,7 +36,7 @@ app.use(router);
 
 function startServer() {
   const server = http.createServer(app);
-  server.listen(8096);
+  server.listen(80);
 }
 
 startServer();

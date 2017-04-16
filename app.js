@@ -21,11 +21,22 @@ router.post('/api/fill-in', (req, res) => {
   res.status(201).send();
 });
 
+router.get('/api/tj', (req, res) => {
+  fs.readFile('people', 'utf-8', (err, data) => {
+    var d = data.trim().split('\n').map((line) => {
+      var data = line.split('##');
+      return {name: data[0], number: data[1]};
+    });
+    res.json(d);
+  });
+});
+
+
 app.use(router);
 
 function startServer() {
   const server = http.createServer(app);
-  server.listen(80);
+  server.listen(8096);
 }
 
 startServer();
